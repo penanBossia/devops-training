@@ -1,0 +1,20 @@
+DROP TABLE product;
+
+CREATE TABLE product (
+	id varchar NOT NULL,
+	title varchar NULL,
+	price float4 NULL,
+	CONSTRAINT product_pk PRIMARY KEY (id)
+);
+
+--CREATE SEQUENCE seq_product
+--	INCREMENT BY 1
+--	MINVALUE 1
+--	MAXVALUE 9223372036854775807
+--	START 1
+--	CACHE 1
+--	NO CYCLE;
+DROP SEQUENCE seq_product;
+CREATE SEQUENCE seq_product
+  START WITH 1
+  INCREMENT BY 1;
