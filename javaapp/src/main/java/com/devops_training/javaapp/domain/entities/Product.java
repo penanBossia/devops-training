@@ -18,7 +18,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-@Builder
 public class Product {
 
     @Id
@@ -28,6 +27,6 @@ public class Product {
 
     private String title;
 
-    private Float price;
+    private float price;
 
 }
