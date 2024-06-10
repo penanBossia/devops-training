@@ -17,6 +17,6 @@ CREATE SEQUENCE seq_product
 INSERT INTO product
 (id, title, price)
 VALUES
-    (nextval('seq_product'), 'processeur', 675.0),
+    (nextval('seq_product'), 'processeur', 674.0),
     (nextval('seq_product'), 'disque dur', 112.0),
     (nextval('seq_product'), 'barette memoire', 258.0);

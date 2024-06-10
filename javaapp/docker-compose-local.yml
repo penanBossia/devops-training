@@ -1,0 +1,10 @@
+name: 'javaapp'
+
+services:
+  
+  api:
+    container_name: javaapp-api
+    build: .
+    ports:
+      - "8081:8080"
+
