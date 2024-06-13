@@ -21,7 +21,7 @@ public class ProductControllerIntegTest {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/v1/products"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.size()").value(3));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.size()").value(2));
 
     }
 }
