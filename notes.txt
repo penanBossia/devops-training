@@ -4,6 +4,11 @@ Quand on rajoute une condition depends_on sur un container, il est de bon aloi d
 - définir les condition dans la dependance
 - associer un healthcheck sur la dependance
 
+
+variables : faire un choix entre les variables en dur dans les fichiers de profil properties et les variables d'env dans le docker-compose
+=> privilégier la deixème option
+
+
 Dockerfile
 
 - Il est plus optimal de classer les commandes en mettant celles qui ont le moins de chance de changer.

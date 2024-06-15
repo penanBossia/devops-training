@@ -33,6 +33,7 @@ HELP.md
 **/.vscode/
 
 **/pythonapp/.venv/
+**/__pycache__
 
 ### Mac OS ###
 **/.DS_Store
