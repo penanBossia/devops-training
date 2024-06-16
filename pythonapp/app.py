@@ -20,6 +20,10 @@ dictConfig({
 })
 
 current_env = os.environ.get("ENVIRONMENT", default=None)
+db_host = os.environ.get("DATABASE_HOST", default="127.0.0.1")
+db_port = os.environ.get("DATABASE_PORT", default=27017)
+db_username = os.environ.get("DATABASE_USERNAME", default="mongodb")
+db_pwd = os.environ.get("DATABASE_PASSWORD", default="mongodb")
 
 app = Flask(__name__)
 
@@ -32,28 +36,29 @@ if (current_env is not None):
         raise RuntimeError("Unknown env")
     
 
-client = MongoClient('mongodb', 27017, username='mongodb', password='mongodb')
+client = MongoClient(db_host, int(db_port), username=db_username, password=db_pwd)
 db = client.pythondb
-product = db.product
+payment = db.payment
 
 @app.route("/", methods=['GET'])
 def hello_world():
     return "<p>" + app.config["MESSAGE"] + "</p>"
 
 
-@app.route("/products", methods=['GET'])
-def getProducts():
-    products = []
-    cursor = product.find()
-    app.logger.info("zaaaaaaaa")
+@app.route("/payments", methods=['GET'])
+def getPayments():
+    payments = []
+    app.logger.info("Retrieve all payments")
+    cursor = payment.find()
    
     
     for record in cursor:
-        app.logger.warning("zooooooooo")
+        app.logger.warning("loop on payments")
         r = {}
         r['id'] = record['id']
-        r['title'] = record['title']
-        r['price'] = record['price']
-        products.append(r)
+        r['description'] = record['description']
+        r['amount'] = record['amount']
+        r['date'] = record['date']
+        payments.append(r)
 
-    return products
+    return payments

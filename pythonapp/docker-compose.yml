@@ -30,6 +30,10 @@ services:
       FLASK_RUN_HOST: 0.0.0.0
       #FLASK_ENV: development
       ENVIRONMENT: prod
+      DATABASE_HOST: mongodb
+      DATABASE_PORT: 27017
+      DATABASE_USERNAME: mongodb
+      DATABASE_PASSWORD: mongodb
     ports:
       - "8000:5000"
     depends_on:
