@@ -2,6 +2,7 @@ from flask import Flask # type: ignore
 from logging.config import dictConfig
 import os
 from pymongo import MongoClient # type: ignore
+from flask_cors import CORS  # type: ignore
 
 dictConfig({
     'version': 1,
@@ -26,6 +27,8 @@ db_username = os.environ.get("DATABASE_USERNAME", default="mongodb")
 db_pwd = os.environ.get("DATABASE_PASSWORD", default="mongodb")
 
 app = Flask(__name__)
+CORS(app, origins=["http://localhost:3000"])
+
 
 if (current_env is not None):
     if (current_env == "local"):
@@ -45,7 +48,7 @@ def hello_world():
     return "<p>" + app.config["MESSAGE"] + "</p>"
 
 
-@app.route("/payments", methods=['GET'])
+@app.route("/v1/payments", methods=['GET'])
 def getPayments():
     payments = []
     app.logger.info("Retrieve all payments")
