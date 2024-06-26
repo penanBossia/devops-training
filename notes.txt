@@ -14,4 +14,4 @@ Dockerfile
 - Il est plus optimal de classer les commandes en mettant celles qui ont le moins de chance de changer.
 Car en cas de changement (d'un layer), tous les autres sont remis à jour - même sans changement.
 - il peut être bien de définir un .dockerignore pour ignorer des fichiers qu'on ne souhaite pas par exemple
-  copier lors de la création de l'image
+  copier lors de la création de l'image.
