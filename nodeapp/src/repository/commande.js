@@ -14,7 +14,7 @@ class CommandeRepository {
       });
     } catch (err) {
       console.error('Error creating Commande:', err);
-      throw err; // Rethrow the error so it can be caught by the route handler
+      throw err;
     }
 
   }

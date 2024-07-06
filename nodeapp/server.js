@@ -4,12 +4,15 @@ require('dotenv').config({
 
 const express = require('express');
 const commandeRoutes = require('./src/resource/commande');
+const healthRoutes = require('./src/resource/health');
 const app = express();
 const db = require('./src/models');
 
 
 app.use(express.json());
-app.use('/commande', commandeRoutes);
+app.use('/api/v1/commande', commandeRoutes);
+app.use('/api/v1/health',healthRoutes);
+
 
 
 db.sequelize.sync().then((req) => {

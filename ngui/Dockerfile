@@ -20,6 +20,7 @@ RUN npm run build --prod
 FROM nginx:alpine
 
 # Copy the built Angular application from the previous stage
+# je prefere que on garde le volume pour la prise en charge des modification 
 COPY ./nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist/ecommerce/browser /usr/share/nginx/html
 
