@@ -1,35 +1,47 @@
 name: 'devops'
 
 services:
-  postgresdb:
+  javadb:
     image: postgres:14.12-alpine
     restart: always
-    container_name: postgresdb
+    container_name: javadb
     ports:
       - "5432:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
       interval: 5s
       timeout: 5s
       retries: 5
     networks:
       - network
-  
+
+  nodedb:
+    image: postgres
+    container_name: nodedb
+    ports:
+      - "5434:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    networks:
+      - network
+
   mongodb:
     image: mongo:7.0.11
     container_name: mongodb
     restart: always
     environment:
-        MONGO_INITDB_ROOT_USERNAME: mongodb
-        MONGO_INITDB_ROOT_PASSWORD: mongodb
-        MONGO_INITDB_DATABASE: pythondb
+      MONGO_INITDB_ROOT_USERNAME: mongodb
+      MONGO_INITDB_ROOT_PASSWORD: mongodb
+      MONGO_INITDB_DATABASE: pythondb
     ports:
-        - 27017:27017
+      - 27017:27017
     volumes:
-        - ./pythonapp/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ./pythonapp/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     healthcheck:
       test: mongosh localhost:27017/test --quiet
       interval: 10s
@@ -38,7 +50,7 @@ services:
       start_period: 40s
     networks:
       - network
-  
+
   javaapi:
     container_name: javaapp
     build: ./javaapp
@@ -46,11 +58,17 @@ services:
       - "8081:8080"
     environment:
       SPRING_PROFILES_ACTIVE: prod
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresdb/postgres
+      SPRING_DATASOURCE_URL: jdbc:postgresql://javadb/postgres
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
+    healthcheck:
+      test: curl http://localhost:8080/
+      interval: 40s
+      timeout: 40s
+      retries: 5
+      start_period: 40s
     depends_on:
-      postgresdb:
+      javadb:
         condition: service_healthy
     networks:
       - network
@@ -74,17 +92,44 @@ services:
         condition: service_healthy
     networks:
       - network
-  
-  reactui:
-    container_name: reactapp
-    build: ./ui-app
+
+  nodeapi:
+    build: ./nodeapp
+    container_name: nodeapp
+    ports:
+      - "3000:3000"
     environment:
-      JAVA_API_URL: http://javaapp:8081/v1/
-      PYTHON_API_URL: http://pythonapp:8082/
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+      - POSTGRES_HOST=nodedb
+      - POSTGRES_PORT=5434
+      - NODE_ENV=qua
+   # depends_on:
+    #  - db
+    networks:
+      - network
+
+  reactui:
+    container_name: reactui
+    build: ./reactui
+    depends_on:
+      javaapi:
+        condition: service_healthy
     networks:
       - network
     ports:
-      - "8080:80"
+      - "8083:80"
+
+  ngui:
+    build:
+      context: ./ngui
+      dockerfile: Dockerfile
+    container_name: ngui
+    ports:
+      - "8084:80"
+    networks:
+      - network
 
 networks:
   network:

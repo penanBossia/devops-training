@@ -1,5 +1,9 @@
 HELP.md
 **/target/
+**/dist/
+**/tmp
+**/out-tsc/
+**/bazel-out/
 !**/.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -18,6 +22,10 @@ HELP.md
 **/*.iws
 **/*.iml
 **/*.ipr
+**/.c9
+**/*.launch
+**/*.sublime-workspace
+
 
 ### NetBeans ###
 **/nbproject/private/
@@ -50,3 +58,14 @@ HELP.md
 **/npm-debug.log*
 **/yarn-debug.log*
 **/yarn-error.log*
+**/.angular/cache
+**/.sass-cache/
+**/connect.lock
+**/coverage
+**/libpeerconnection.log
+**/testem.log
+**/typings
+**/Thumbs.db
+**/.editorconfig
+**/keys/
+
