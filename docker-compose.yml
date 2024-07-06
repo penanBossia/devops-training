@@ -19,7 +19,7 @@ services:
       - network
 
   nodedb:
-    image: postgres
+    image: postgres:14.12-alpine
     container_name: nodedb
     ports:
       - "5434:5432"
@@ -79,7 +79,6 @@ services:
     environment:
       FLASK_APP: app.py
       FLASK_RUN_HOST: 0.0.0.0
-      #FLASK_ENV: development
       ENVIRONMENT: prod
       DATABASE_HOST: mongodb
       DATABASE_PORT: 27017
@@ -105,8 +104,6 @@ services:
       - POSTGRES_HOST=nodedb
       - POSTGRES_PORT=5434
       - NODE_ENV=qua
-   # depends_on:
-    #  - db
     networks:
       - network
 
