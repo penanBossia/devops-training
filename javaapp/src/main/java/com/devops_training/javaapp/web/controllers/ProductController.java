@@ -26,7 +26,7 @@ public class ProductController {
     @Value("${app.environment}")
     private String environment;
 
-    @GetMapping("/v1")
+    @GetMapping("/api/v1")
     public ResponseEntity<String> hello() {
         log.info("[ENDPOINT] Received hello request");
 
@@ -34,7 +34,7 @@ public class ProductController {
 
     }
 
-    @GetMapping("/v1/products")
+    @GetMapping("/api/v1/products")
     public ResponseEntity<List<ProductDTO>> getAllProducts() {
         log.info("[ENDPOINT] Received request to get all product");
 

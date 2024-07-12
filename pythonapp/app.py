@@ -41,12 +41,12 @@ client = MongoClient(db_host, int(db_port), username=db_username, password=db_pw
 db = client.pythondb
 payment = db.payment
 
-@app.route("/", methods=['GET'])
+@app.route("/api", methods=['GET'])
 def hello_world():
     return "<p>" + app.config["MESSAGE"] + "</p>"
 
 
-@app.route("/v1/payments", methods=['GET'])
+@app.route("/api/v1/payments", methods=['GET'])
 def getPayments():
     payments = []
     app.logger.info("Retrieve all payments")

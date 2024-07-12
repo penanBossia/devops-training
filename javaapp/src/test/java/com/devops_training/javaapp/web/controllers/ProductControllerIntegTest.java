@@ -19,7 +19,7 @@ public class ProductControllerIntegTest {
     @Test
     void testGetAllProducts() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/v1/products"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/products"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.size()").value(2));
 

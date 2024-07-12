@@ -23,8 +23,10 @@
     "@angular/router": "^17.3.0",
     "angular-material": "^1.2.5",
     "material": "^0.9.11",
+    "ngx-slick-carousel": "^17.0.0",
     "primeng": "^17.18.0",
     "rxjs": "~7.8.0",
+    "slick-carousel": "^1.8.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
   },
