@@ -10,7 +10,7 @@ export class ProductService {
 
   private _httpClient = inject(HttpClient);
 
-  private apiUrl = '/javaapi/v1/products';
+  private apiUrl = 'javaapi/v1/products';
   getProducts(): Observable<Product[]> {
     const headers = new HttpHeaders({
       'Accept': 'application/json'

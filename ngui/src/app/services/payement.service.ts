@@ -10,7 +10,7 @@ export class PayementService {
 
   private _httpClient = inject(HttpClient);
 
-  private apiUrl = '/pythonapi/v1/payments';
+  private apiUrl = 'pythonapi/v1/payments';
   getPayments(): Observable<Payement[]> {
     const headers = new HttpHeaders({
       'Accept': 'application/json'

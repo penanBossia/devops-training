@@ -22,11 +22,12 @@ services:
     image: postgres:14.12-alpine
     container_name: nodedb
     ports:
-      - "5434:5432"
+      - "5434:5434"
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=postgres
+      - POSTGRES_PORT=5434
     networks:
       - network
 
@@ -103,7 +104,7 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_HOST=nodedb
       - POSTGRES_PORT=5434
-      - NODE_ENV=qua
+      #- NODE_ENV=qua
     networks:
       - network
 
