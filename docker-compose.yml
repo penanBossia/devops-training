@@ -136,8 +136,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./reverseproxy/sites-available/ngui.conf:/etc/nginx/sites-enabled/ngui.conf
-      - ./reverseproxy/sites-available/reactui.conf:/etc/nginx/sites-enabled/reactui.conf
+      - ./reverseproxy/conf.d/default.conf:/etc/nginx/conf.d/default.conf
 
 networks:
   network:
