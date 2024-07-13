@@ -129,6 +129,16 @@ services:
     networks:
       - network
 
+  rp:
+    image: nginx:1.27.0-alpine
+    restart: always
+    container_name: rp
+    ports:
+      "80:80"
+    volumes:
+      - ./reverseproxy/sites-available/ngui.conf:/etc/nginx/sites-enabled/ngui.conf
+      - ./reverseproxy/sites-available/reactui.conf:/etc/nginx/sites-enabled/reactui.conf
+
 networks:
   network:
     driver: bridge
