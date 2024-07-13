@@ -131,7 +131,6 @@ services:
 
   rp:
     image: nginx:1.27.0-alpine
-    restart: always
     container_name: rp
     ports:
       - "80:80"
