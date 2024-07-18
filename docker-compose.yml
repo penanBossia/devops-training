@@ -135,7 +135,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./rp/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+      - ./rp/default.conf:/etc/nginx/conf.d/default.conf
 
 networks:
   network:
