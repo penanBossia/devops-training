@@ -136,6 +136,8 @@ services:
       - "80:80"
     volumes:
       - ./rp/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - network
 
 networks:
   network:
