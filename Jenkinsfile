@@ -1,5 +1,5 @@
 pipeline {
-    agent none
+    agent any
     stages {
         stage('🦊 Checkout') {
             steps {
@@ -9,18 +9,23 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Build java app'
-                sh 'cd ./javaapp && ./mvn clean package'
+                sh 'cd ./javaapp && ./mvnw clean package'
             }
         }
-        stage('Tests') {
+        stage('Unit tests') {
             steps {
-                sh 'pwd'
-                // sh 'mvn test'
+                sh 'Test java app'
+                sh 'cd ./javaapp && ./mvnw test'
             }
         }
         stage('Integration tests') {
             steps {
-                sh 'mvn integration-test'
+                sh 'cd ./javaapp && ./mvnw integration-test'
+            }
+        }
+        stage('clean WS') {
+            steps {
+                cleanWs()
             }
         }
     }
