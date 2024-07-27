@@ -14,13 +14,13 @@ pipeline {
         }
         stage('Tests') {
             steps {
-                pwd
+                sh 'pwd'
                 // sh 'mvn test'
             }
         }
         stage('Integration tests') {
             steps {
-                // sh 'mvn test'
+                sh 'mvn integration-test'
             }
         }
     }
