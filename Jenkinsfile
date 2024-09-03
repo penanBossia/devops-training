@@ -23,6 +23,11 @@ pipeline {
                 sh 'cd ./javaapp && ./mvnw integration-test'
             }
         }
+        stage('Analyse') {
+            steps {
+                sh 'cd ./javaapp && ./mvnw integration-test'
+            }
+        }
         stage('clean WS') {
             steps {
                 cleanWs()
