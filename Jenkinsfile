@@ -14,7 +14,6 @@ pipeline {
         }
         stage('Unit tests') {
             steps {
-                sh 'Test java app'
                 sh 'cd ./javaapp && ./mvnw test'
             }
         }
@@ -23,9 +22,10 @@ pipeline {
                 sh 'cd ./javaapp && ./mvnw integration-test'
             }
         }
-        stage('Analyse') {
+        stage('Analyse Sonar') {
             steps {
-                sh 'cd ./javaapp && ./mvnw integration-test'
+                sh 'cd ./javaapp && ./mvnw sonar:sonar'
+
             }
         }
         stage('clean WS') {
