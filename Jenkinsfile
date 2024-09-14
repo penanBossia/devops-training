@@ -6,12 +6,6 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Build') {
-            steps {
-                echo 'Build Javaapp'
-                sh 'cd ./javaapp && ./mvnw clean package'
-            }
-        }
         stage('Unit tests') {
             steps {
                 echo 'Units test Javaapp'
@@ -42,6 +36,31 @@ pipeline {
                         sh "cd ./ngui && ${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=analyseReact -Dsonar.sources=. -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_7467dcade344b7f19df282e66223381a29fdd7cc"
                     }
                 }
+            }
+        }
+        stage('Build images') {
+            steps {
+                echo 'Build images'
+                sh "docker build -t 'pbossia/devops-javaapi:1.0.0' './javaapp'"
+                sh "docker build -t 'pbossia/devops-nodeapi:1.0.0' './nodeapp'"
+                sh "docker build -t 'pbossia/devops-pythonapi:1.0.0' './pythonapp'"
+                sh "docker build -t 'pbossia/devops-ngui:1.0.0' './ngui'"
+                sh "docker build -t 'pbossia/devops-reactui:1.0.0' './reactui'"
+            }
+        }
+        stage('Push and remove images') {
+            steps {
+                echo 'Push images'
+                withCredentials([usernamePassword(credentialsId: 'dockerhub_creds', passwordVariable: 'password', usernameVariable: 'username')]) {
+                    sh "docker login -u ${username} -p ${password}"
+                    sh "docker push 'pbossia/devops-javaapi:1.0.0'"
+                    sh "docker push 'pbossia/devops-nodeapi:1.0.0'"
+                    sh "docker push 'pbossia/devops-pythonapi:1.0.0'"
+                    sh "docker push 'pbossia/devops-ngui:1.0.0'"
+                    sh "docker push 'pbossia/devops-reactui:1.0.0'"
+                    sh "docker logout"
+                }
+                sh "docker rmi 'pbossia/devops-javaapi:1.0.0' 'pbossia/devops-nodeapi:1.0.0' 'pbossia/devops-pythonapi:1.0.0' 'pbossia/devops-ngui:1.0.0' 'pbossia/devops-reactui:1.0.0'"
             }
         }
         stage('clean WS') {
