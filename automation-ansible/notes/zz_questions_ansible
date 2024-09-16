@@ -1,0 +1,54 @@
+La principale différence entre Kibana et Grafana => Le premier monitore les logs et le second les métrics
+
+
+
+C'est quoi une image docker / un container docker
+
+
+
+1. Quelle différence entre liveness et readiness et les probe ?
+=> mecanisme dans kube pour indiquer si le pod est prêt à recevoir du trafic
+=> liveness si le pod est en vie
+
+2. Quels sont les cycles de vie d'un projet maven ?
+=> clean, validate, compile, test, verify, package, install, deploy, site
+
+3. A quoi sert Anible ?
+=> Automatiser le config des serverus
+=> Automatiser des déploiements
+=> Orchestration des tâches
+=> Déployer de l'infra (instance EC2...) peréférer terraform
+
+4. A quoi sert Prometheus
+=> Faire du scraping sur des endpoints en vue de récupérer et stocker des métrics
+=> Il met ces métrics à disposition des outils comme Grafana afin de les afficher
+
+5. Expliquer le role des exporteurs prometheus
+=> ce sont des agents configurés par des applications (frameworks) tiers qui permettent
+d'exposer via des endpoints les metrics de ces applications a Prometheus.
+
+6. Comment configuer un scrap job dans Prometheus ?
+=> Dans le fichier de config de prometheus
+
+7. Quelle est la différenc entre Kibana et Grafana ?
+=> Le premier pour l'analyse des logs
+=> Le second pour l'analyse des métrics
+
+8. C'est quoi une image docker ? un container docker ?
+=> une image est un objet qui décrit comment créer un container
+=> Le container est une exécution de l'image dans un environnement isolé
+
+9. Comment Ansible gère les secrets ?
+=> Ansible vault
+=> Variables d'environnement pour accéder à Vault
+
+10. Quelle est la différence entre un role et un playbook Ansible ?
+=> Un rôle est un élément modulaire d'un playbook ansible qui est réutilisable, variablisable
+=> Un playbook est le fichier de configuration qui centralise les tâches à automatiser avec Ansible, C'est le point d'enrtrée.
+
+11. Qu'est que le fichier docker-compose ?
+=> C'est un fichier de configuration YAML qui permet de défnnir et configurer la liste des services à lancer.
+
+
+
+

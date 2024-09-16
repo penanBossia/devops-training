@@ -1,0 +1,5 @@
+---
+# defaults file for deploy
+java_version: 17
+git_repo: 'https://github.com/mchekini-check-consulting/annonce-project.git'
+git_branch: 'ansible'

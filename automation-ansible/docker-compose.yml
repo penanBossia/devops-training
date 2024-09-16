@@ -1,0 +1,52 @@
+name: 'ansible'
+
+services:
+  controller:
+    container_name: controller
+    build:
+      dockerfile: ansible.Dockerfile
+    volumes:
+      - ./ansible-playbooks:/opt/ansible
+    tty: true
+    networks:
+      - network
+
+  ubuntu1:
+    container_name: ubuntu1
+    build:
+      dockerfile: ./ubuntu.Dockerfile
+    tty: true
+    volumes:
+      - ./data1:/data
+    networks:
+      - network
+
+  ubuntu2:
+    container_name: ubuntu2
+    build:
+      dockerfile: ./ubuntu.Dockerfile
+    tty: true
+    volumes:
+      - ./data2:/data
+    networks:
+      - network
+
+  fedora2:
+    container_name: fedora2
+    build:
+      dockerfile: ./fedora2.Dockerfile
+    tty: true
+    volumes:
+      - ./data4:/data
+    networks:
+      - network
+
+volumes:
+  data1:
+  data2:
+  data3:
+  data4:
+
+networks:
+  network:
+    driver: bridge

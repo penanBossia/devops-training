@@ -1,0 +1,53 @@
+ANsible :
+    - automatisation config serveurs
+    - automatisation des deploiement
+    - orchestrer des taches
+
+    - communication en SSH avec les hotes linus et en WinRM avec les windows
+
+    - invenrtaire ansible : fichier qui définit les groupes de machine
+    chaque groupe comprend un ensmeble d'hotes ainsi que pour chacun la manière de s'y connecter
+
+    - playbook : ensemble de taches
+
+    - handler : permet d'être notifier si la tache qui définit le notify apporte un changement
+
+
+
+Etapes pour la réalisation du TP Ansible
+1. Création des Dockerfile
+    - un fichier pour le controlleur Ansible
+    - un fichier pour les hotes ubuntu
+    - un fichier pour l'hote fedora
+
+2. Création du docker-compose.
+    Ajout des instructions tty: true dans la config des hotes pour les maintenir up. sinon il s exists au bout de
+    quelques secondes
+    Ajout des volumes sur les différents containers pour persister les donnees
+
+3. Configuration SSH
+    - sur le controlleur Ansible, générer des clé SSH avec ssh-keygen
+    - copier la clé publique du controlleur Ansible dans le fichier /{user}/.ssh/authorized_keys des hotes.
+        Dans notre cas le user était root
+        N.B. : la configuration sur l'hote fedora a nécessité de lancer la commande ssh-keygen -A. Cette commande permet
+            d'ajouter toutes les clés privées à l'agent SSH. Elle est rendu nécessaire par l'installation du module SSH avec
+            YUM. Certainement pas nécessaire avec le gestionnaire de package dnf.
+    - démarrage de SSH sur les hotes :
+        - ubuntu : service start ssh
+        - fedora : /usr/sbin/sshd &
+    - Tester le connection du controlleur aux hotes
+
+
+4.  Création du fichier d'inventaire hosts
+    Ce fichier contient les différents environnement à configurer. Chaque environnement dispose d'un ensemble d'hotes
+    Pour chaque hotes, on décrit la manière dont le controlleur Ansible s'y connectera :
+        ansible_connection=ssh ansible_user=root ansible_ssh_private_key={path_cle_privee}
+
+5. Création du playbook
+    - Il s'est avéré utile de définir une tache debug qui affiche la variable ansible_fact associée à la propriété
+        gather_facts du playbook.
+    - Des tâches ont été définies dans le playbook (point d'entrée de Ansible - un peu comme le main de java).
+    Ces task ont été remplacées par un role
+
+6. Création du role
+    - Le role a été créé avec la commande ansible-galaxy init {nom_role}

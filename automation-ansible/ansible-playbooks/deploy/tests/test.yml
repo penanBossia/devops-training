@@ -1,0 +1,16 @@
+---
+- hosts: all # executer sur toutes les machines
+  remote_user: root
+  roles:
+    - deploy
+
+  tasks:
+    - name: Verificationn du lancement de l'appli
+      command: "curl -s -o /dev/null -w '%{http_code}' http://{{ansible_hostname}}:8080/api/v1/annonce
+      register: status_code
+    - name: Verification du status code
+      assert:
+        that:
+          - status_code == 200
+        success_msg: Application demarree avec succes
+        fail_msg: Echec demarrage application

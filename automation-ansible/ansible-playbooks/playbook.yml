@@ -1,0 +1,11 @@
+- name: Servers managment
+  hosts: all
+  become: yes
+  gather_facts: true
+
+  #tasks:
+   # - name: info
+    #  debug:
+     #   var: ansible_facts
+  roles:
+    - deploy

@@ -1,0 +1,37 @@
+---
+# tasks file for deploy
+- name: Install components on ubuntu
+  apt:
+    name: "{{item}}" # item est le nom du package à installer. Il est défini dans le corps de la loop
+    state: present
+  loop:
+    - git
+    - "openjdk-{{java_version}}-jdk" # variablisation de la version de java à installer. Par defaut, on prend dans defaults, sinon dans vars
+    - maven
+  when: "ansible_distribution=='Ubuntu'" # distribution est une keys de la variable ansible_facts. faire précéder la keys par "ansible"
+
+- name: Install components on Fedora
+  yum:
+    name: "{{item}}"
+    state: present
+  loop:
+    - git
+    - "java-{{java_version}}-openjdk"
+    - maven
+  when: "ansible_distribution=='Fedora'"
+
+- name: Clone Git repository
+  git:
+    repo: "{{git_repo}}"
+    dest: /opt
+    version: "{{git_branch}}"
+
+- name: Build Maven project
+  command: mvn clean package -DskipTests
+  args:
+    chdir: /opt/annonce-api #annonce-api est le projet maven du repo
+
+- name: Deploy Maven project
+  command: java -jar annonce-api-0.0.1-SNAPSHOT.jar --spring.profiles.active=test &
+  args:
+    chdir: /opt/annonce-api/target/ #annonce-api est le projet maven du repo

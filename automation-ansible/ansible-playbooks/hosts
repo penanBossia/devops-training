@@ -1,0 +1,8 @@
+[integration]
+ubuntu1 ansible_connection=ssh ansible_user=root ansible_ssh_private_key=/root/.ssh/id_ed25519
+
+[qualification]
+ubuntu2 ansible_connection=ssh ansible_user=root ansible_ssh_private_key=/root/.ssh/id_ed25519
+
+[production]
+fedora2 ansible_connection=ssh ansible_user=root ansible_ssh_private_key=/root/.ssh/id_ed25519
