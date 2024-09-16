@@ -1,12 +1,12 @@
-ANsible :
+Ansible :
     - automatisation config serveurs
     - automatisation des deploiement
     - orchestrer des taches
 
-    - communication en SSH avec les hotes linus et en WinRM avec les windows
+    - communication en SSH avec les hotes linux et en WinRM avec les windows
 
     - invenrtaire ansible : fichier qui définit les groupes de machine
-    chaque groupe comprend un ensmeble d'hotes ainsi que pour chacun la manière de s'y connecter
+        chaque groupe comprend un ensmeble d'hotes ainsi que pour chacun la manière de s'y connecter
 
     - playbook : ensemble de taches
 
