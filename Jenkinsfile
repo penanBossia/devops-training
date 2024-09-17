@@ -63,6 +63,15 @@ pipeline {
                 sh "docker rmi 'pbossia/devops-javaapi:1.0.0' 'pbossia/devops-nodeapi:1.0.0' 'pbossia/devops-pythonapi:1.0.0' 'pbossia/devops-ngui:1.0.0' 'pbossia/devops-reactui:1.0.0'"
             }
         }
+
+        stage('Deploy') {
+            agent 'ubuntu'
+            steps {
+                sh 'docker-compose stop || true'
+                sh 'docker-compose rm -fv || true'
+                sh 'docker compose -f docker-compose-version.yml up -d'
+            }
+        }
         stage('clean WS') {
             steps {
                 cleanWs()
