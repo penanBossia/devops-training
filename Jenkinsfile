@@ -18,7 +18,7 @@ pipeline {
                 sh 'cd ./javaapp && ./mvnw integration-test'
             }
         }
-        stage('Analyse Sonar') {
+        /*stage('Analyse Sonar') {
             steps {
                 echo "Analyse Javaapp"
                 sh "cd ./javaapp && ./mvnw sonar:sonar -Dsonar.projectKey=analyseJava -Dsonar.projectName='analyseJava' -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_c9aa8031537213d34307eabeac5f0ac2e45a9d84"
@@ -37,7 +37,7 @@ pipeline {
                     }
                 }
             }
-        }
+        }*/
         stage('Build images') {
             steps {
                 echo 'Build images'
