@@ -30,7 +30,6 @@ HELP.md
 ### NetBeans ###
 **/nbproject/private/
 **//nbbuild/
-**//dist/
 **/nbdist/
 **/.nb-gradle/
 **/build/
@@ -61,7 +60,6 @@ HELP.md
 **/.angular/cache
 **/.sass-cache/
 **/connect.lock
-**/coverage
 **/libpeerconnection.log
 **/testem.log
 **/typings
@@ -70,3 +68,6 @@ HELP.md
 **/keys/
 **/notes.txt
 
+**/.terrform
+^.tfstate
+^^tfstate.backup
