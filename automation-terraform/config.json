@@ -1,0 +1,44 @@
+{
+  "vpc_cidr": "10.0.0.0/16",
+  "subnets_cidr": [
+    "10.0.1.0/24",
+    "10.0.2.0/24"
+  ],
+
+  "ec2_security_groups": {
+    "sg_name": "app-ec2-sg",
+    "ingress": [
+      {
+        "in_from_port": 80,
+        "in_to_port": 80,
+        "in_protocol": "tcp",
+        "in_cidr": ["0.0.0.0/0"]
+      },
+      {
+        "in_from_port": 22,
+        "in_to_port": 22,
+        "in_protocol": "tcp",
+        "in_cidr": ["0.0.0.0/0"]
+      }
+    ],
+    "egress": [
+      {
+        "eg_from_port": 0,
+        "eg_to_port": 0,
+        "eg_protocol": "-1",
+        "eg_cidr": ["0.0.0.0/0"]
+      }
+    ]
+  },
+
+  "ec2_instances": [
+    {
+      "ec2_ami": "ami-0e86e20dae9224db8",
+      "ec2_instance_type":  "t2.micro"
+    },
+    {
+      "ec2_ami": "ami-0e86e20dae9224db8",
+      "ec2_instance_type":  "t2.micro"
+    }
+  ]
+}
