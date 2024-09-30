@@ -1,8 +1,24 @@
 {
-  "vpc_cidr": "10.0.0.0/16",
+  "vpc_id": "vpc-0b9e81d62f80c0daa",
+  "vpc_cidr": "172.31.0.0/16",
   "subnets_cidr": [
-    "10.0.1.0/24",
-    "10.0.2.0/24"
+    "172.31.1.0/24",
+    "172.31.2.0/24"
+  ],
+  "subnets_az": [
+    "us-east-1c",
+    "us-east-1d"
+  ],
+
+  "ec2_instances": [
+    {
+      "ec2_ami": "ami-0ebfd941bbafe70c6",
+      "ec2_instance_type":  "t2.micro"
+    },
+    {
+      "ec2_ami": "ami-0ebfd941bbafe70c6",
+      "ec2_instance_type":  "t2.micro"
+    }
   ],
 
   "ec2_security_groups": {
@@ -30,15 +46,36 @@
       }
     ]
   },
+  "lb_security_groups": {
+    "sg_name": "app-lb-sg",
+    "ingress": [
+      {
+        "in_from_port": 0,
+        "in_to_port": 0,
+        "in_protocol": "-1",
+        "in_cidr": ["0.0.0.0/0"]
+      }
+    ],
+    "egress": [
+      {
+        "eg_from_port": 0,
+        "eg_to_port": 0,
+        "eg_protocol": "-1",
+        "eg_cidr": ["0.0.0.0/0"]
+      }
+    ]
+  },
 
-  "ec2_instances": [
-    {
-      "ec2_ami": "ami-0e86e20dae9224db8",
-      "ec2_instance_type":  "t2.micro"
-    },
-    {
-      "ec2_ami": "ami-0e86e20dae9224db8",
-      "ec2_instance_type":  "t2.micro"
-    }
-  ]
+  "lb_props": {
+    "lb_name": "app-lb",
+    "lb_type": "application",
+    "lb_internal": false
+  },
+
+  "lb_tg_props": {
+    "lb_tg_name": "app-lb-target",
+    "lb_tg_port": 80,
+    "lb_tg_proto": "HTTP",
+    "lb_tg_type": "instance"
+  }
 }

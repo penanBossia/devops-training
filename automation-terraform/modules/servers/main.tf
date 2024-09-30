@@ -4,7 +4,7 @@ resource "aws_instance" "app-instances" {
 
   ami = var.ec2_instances[count.index].ec2_ami
   instance_type = var.ec2_instances[count.index].ec2_instance_type
-  subnet_id = var.ec2_subnet_ids[var.ec2_subnets_length % (count.index + 1)]
+  subnet_id = var.ec2_subnet_ids[count.index]
   vpc_security_group_ids = var.ec2_sg_ids
   user_data = templatefile("./scripts/init.tftpl", {instance_number = count.index + 1})
 }
